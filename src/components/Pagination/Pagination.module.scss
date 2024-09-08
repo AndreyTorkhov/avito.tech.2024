@@ -1,0 +1,33 @@
+@import "../../styles/variables.scss";
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: $spacing-medium;
+
+  button {
+    background-color: $pagination-bg;
+    color: $pagination-text-color;
+    border: none;
+    border-radius: $pagination-border-radius;
+    padding: $pagination-padding;
+    margin: 0 $pagination-spacing;
+    cursor: pointer;
+    transition: background-color $transition;
+
+    &:hover {
+      background-color: $pagination-hover-bg;
+    }
+
+    &:disabled {
+      background-color: $pagination-disabled-bg;
+      cursor: not-allowed;
+    }
+  }
+
+  span {
+    font-size: $font-size-main;
+    margin: 0 $pagination-spacing;
+  }
+}

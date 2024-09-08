@@ -1,0 +1,44 @@
+@use "../../styles/variables.scss" as *;
+
+.card {
+  background-color: $card-bg;
+  border: $card-border;
+  border-radius: $card-radius;
+  padding: $card-padding;
+  transition: transform $transition ease, box-shadow $transition ease;
+
+  &:hover {
+    transform: scale($card-hover-scale);
+    box-shadow: $card-hover-shadow;
+  }
+
+  &__image {
+    width: 100%;
+    height: auto;
+    border-radius: $border-radius-small;
+    object-fit: cover;
+  }
+
+  &__content {
+    margin-top: $spacing-small;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__title {
+    font-size: $font-size-main;
+    margin-bottom: $spacing-small;
+  }
+
+  &__price {
+    font-size: $font-size-small;
+    color: $color-dark-gray;
+  }
+
+  &__stat {
+    display: flex;
+    justify-content: space-between;
+    margin-top: $spacing-small;
+    font-size: $font-size-small;
+  }
+}
