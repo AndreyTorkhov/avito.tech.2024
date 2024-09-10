@@ -8,14 +8,18 @@
   padding-bottom: 50px;
 }
 
-.controls {
+.toolsContainer {
   display: flex;
-  justify-content: end;
-  margin-top: -30px;
-  margin-right: 20px;
+  justify-content: space-between; // Равномерное распределение элементов
+  align-items: center; // Вертикальное выравнивание по центру
+  padding: 10px 0;
   margin-bottom: 20px;
 }
 
+.controls {
+  display: flex;
+  align-items: center;
+}
 .cardsContainer {
   display: grid;
   gap: 20px;
@@ -27,45 +31,5 @@
 
   @media (max-width: 599px) {
     grid-template-columns: repeat(4, minmax(200px, 1fr));
-  }
-}
-
-.card {
-  background-color: $card-bg;
-  border: $card-border;
-  border-radius: $card-radius;
-  padding: $card-padding;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-  &:hover {
-    transform: scale($card-hover-scale);
-    box-shadow: $card-hover-shadow;
-  }
-
-  &__image {
-    width: 100%;
-    height: auto;
-    border-radius: 4px;
-  }
-
-  &__content {
-    margin-top: 10px;
-  }
-
-  &__title {
-    font-size: 1.2rem;
-    margin-bottom: 8px;
-  }
-
-  &__price {
-    font-size: 1rem;
-    color: #444;
-  }
-
-  &__stat {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 8px;
-    font-size: 0.9rem;
   }
 }

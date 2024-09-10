@@ -1,45 +1,86 @@
 import React, { useState } from "react";
 import { createAdvertisement } from "../../utils/network";
 import { generateUniqueId } from "../../services/generateUniqueId";
+import { useDispatch } from "react-redux";
+import { Advertisement } from "../../types/interfaces";
+import { addAdvertisement } from "../../store/advertisementSlice";
 import styles from "./CreaterAdvertisement.module.scss";
+import defaultImage from "../../containers/StartPage/img/avito.jpeg";
 
-const CreaterAdvertisement: React.FC = () => {
+const CreaterAdvertisement: React.FC<{
+  onAdvertisementCreated: () => void;
+}> = ({ onAdvertisementCreated }) => {
+  const [formData, setFormData] = useState<Partial<Advertisement>>({
+    name: "",
+    price: 0,
+    description: "",
+    imageUrl: "",
+  });
   const [isModalOpen, setModalOpen] = useState(false);
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState(0);
-  const [views, setViews] = useState(0);
-  const [likes, setLikes] = useState(0);
-  const [description, setDescription] = useState("");
-  const [imageFile, setImageFile] = useState<File | null>(null); // Храним выбранный файл
+  const dispatch = useDispatch();
+
+  // Функция для сброса формы
+  const resetForm = () => {
+    setFormData({
+      name: "",
+      price: 0,
+      description: "",
+      imageUrl: "",
+    });
+  };
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    const newAdvertisement = {
+    // Проверка URL изображения и установка заглушки, если URL пустой или некорректен
+    const imageUrl =
+      formData.imageUrl && isValidUrl(formData.imageUrl)
+        ? formData.imageUrl
+        : defaultImage;
+
+    const newAd: Advertisement = {
       id: generateUniqueId(),
-      name,
-      price,
-      description,
+      name: formData.name || "",
+      price: formData.price || 0,
+      description: formData.description || "",
       createdAt: new Date().toISOString(),
-      views,
-      likes,
-      imageFile,
+      views: formData.views || 0,
+      likes: formData.likes || 0,
+      imageUrl: imageUrl,
     };
 
-    const result = await createAdvertisement(newAdvertisement);
+    dispatch(addAdvertisement(newAd));
+
+    const result = await createAdvertisement(newAd);
 
     if (result) {
-      alert("Advertisement created successfully!");
+      alert("Объявление успешно создано!");
       setModalOpen(false);
+      onAdvertisementCreated(); // Обновляем список объявлений
+      resetForm(); // Сбрасываем форму после успешной отправки
     } else {
-      alert("Error creating advertisement.");
+      alert("Ошибка при создании объявления.");
     }
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      setImageFile(e.target.files[0]); // Сохраняем выбранный файл
+  // Валидация URL для проверки корректности ссылки
+  const isValidUrl = (url: string) => {
+    try {
+      new URL(url);
+      return true;
+    } catch (_) {
+      return false;
     }
+  };
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   return (
@@ -64,8 +105,9 @@ const CreaterAdvertisement: React.FC = () => {
                 Название:
                 <input
                   type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
                   required
                 />
               </label>
@@ -73,44 +115,28 @@ const CreaterAdvertisement: React.FC = () => {
                 Цена:
                 <input
                   type="number"
-                  value={price}
-                  onChange={(e) => setPrice(Number(e.target.value))}
-                  required
-                />
-              </label>
-              <label>
-                Просмотры:
-                <input
-                  type="number"
-                  value={views}
-                  onChange={(e) => setViews(Number(e.target.value))}
-                  required
-                />
-              </label>
-              <label>
-                Лайки:
-                <input
-                  type="number"
-                  value={likes}
-                  onChange={(e) => setLikes(Number(e.target.value))}
+                  name="price"
+                  value={formData.price}
+                  onChange={handleInputChange}
                   required
                 />
               </label>
               <label>
                 Описание:
                 <textarea
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
+                  name="description"
+                  value={formData.description}
+                  onChange={handleInputChange}
                   required
                 />
               </label>
               <label>
-                Изображение:
+                URL Изображения:
                 <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleFileChange}
-                  required
+                  type="text"
+                  name="imageUrl"
+                  value={formData.imageUrl}
+                  onChange={handleInputChange}
                 />
               </label>
               <button type="submit">Создать</button>

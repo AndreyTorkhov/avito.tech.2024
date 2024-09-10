@@ -1,4 +1,4 @@
-export type Advertisment = {
+export type Advertisement = {
   id: string;
   name: string;
   description?: string;

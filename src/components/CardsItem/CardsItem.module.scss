@@ -5,7 +5,7 @@
   border: $card-border;
   border-radius: $card-radius;
   padding: $card-padding;
-  transition: transform $transition ease, box-shadow $transition ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 
   &:hover {
     transform: scale($card-hover-scale);
@@ -15,30 +15,27 @@
   &__image {
     width: 100%;
     height: auto;
-    border-radius: $border-radius-small;
-    object-fit: cover;
+    border-radius: 4px;
   }
 
   &__content {
-    margin-top: $spacing-small;
-    display: flex;
-    flex-direction: column;
+    margin-top: 10px;
   }
 
   &__title {
-    font-size: $font-size-main;
-    margin-bottom: $spacing-small;
+    font-size: 1.2rem;
+    margin-bottom: 8px;
   }
 
   &__price {
-    font-size: $font-size-small;
-    color: $color-dark-gray;
+    font-size: 1rem;
+    color: #444;
   }
 
   &__stat {
     display: flex;
     justify-content: space-between;
-    margin-top: $spacing-small;
-    font-size: $font-size-small;
+    margin-top: 8px;
+    font-size: 0.9rem;
   }
 }
