@@ -1,3 +1,6 @@
+let currentId = 10;
+
 export const generateUniqueId = (): string => {
-  return Math.random().toString(36).slice(2, 11);
+  currentId += 1;
+  return currentId.toString();
 };

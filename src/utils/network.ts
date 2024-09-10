@@ -1,4 +1,4 @@
-import { Advertisment } from "../types/interfaces";
+import { Advertisement } from "../types/interfaces";
 
 export const getApiResource = async (url: string) => {
   try {
@@ -16,7 +16,7 @@ export const getApiResource = async (url: string) => {
   }
 };
 
-export const createAdvertisement = async (advertisement: Advertisment) => {
+export const createAdvertisement = async (advertisement: Advertisement) => {
   try {
     const res = await fetch("http://localhost:3000/advertisements", {
       method: "POST",
@@ -36,4 +36,20 @@ export const createAdvertisement = async (advertisement: Advertisment) => {
     console.error("Error creating advertisement:", error);
     return null;
   }
+};
+
+export const updateApiResource = async (url: string, data: object) => {
+  const response = await fetch(url, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    throw new Error("Не удалось обновить ресурс");
+  }
+
+  return response.json();
 };

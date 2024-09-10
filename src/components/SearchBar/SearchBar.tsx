@@ -12,9 +12,9 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
     const value = event.target.value;
     setQuery(value);
     if (value.length > 2) {
-      onSearch(value); // Передаем запрос родительскому компоненту
+      onSearch(value);
     } else {
-      onSearch(""); // Очищаем поиск, если меньше 3 символов
+      onSearch("");
     }
   };
 

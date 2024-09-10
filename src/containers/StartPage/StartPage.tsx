@@ -88,6 +88,7 @@ const StartPage: React.FC = () => {
           .map((ad) => (
             <CardsItem
               key={ad.id}
+              id={ad.id}
               imageUrl={ad.imageUrl}
               title={ad.name}
               price={ad.price}

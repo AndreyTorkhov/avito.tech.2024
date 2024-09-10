@@ -5,11 +5,11 @@ import AdvertisementsPage from "../containers/AdvertisementsPage";
 const routesConfig = [
   {
     path: "/",
-    component: StartPage, // Главная страница со всеми объявлениями
+    component: StartPage,
   },
   {
-    path: "/:id",
-    component: AdvertisementsPage, // Страница отдельного объявлени
+    path: "/advertisement/:id",
+    component: AdvertisementsPage,
   },
   {
     path: "/orders",
