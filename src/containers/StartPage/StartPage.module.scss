@@ -1,4 +1,4 @@
-@use "../../styles/variables.scss" as *;
+@import "../../styles/variables.scss";
 
 .pageContainer {
   position: relative;
@@ -10,16 +10,33 @@
 
 .toolsContainer {
   display: flex;
-  justify-content: space-between; // Равномерное распределение элементов
-  align-items: center; // Вертикальное выравнивание по центру
+  justify-content: space-between;
+  align-items: center;
   padding: 10px 0;
   margin-bottom: 20px;
+}
+
+.orderButton {
+  background-color: $color-blue;
+  color: $color-white;
+  padding: $spacing-small;
+  border: none;
+  border-radius: $border-radius-medium;
+  cursor: pointer;
+  font-size: $font-size-main;
+  transition: background-color $transition;
+  text-decoration: none;
+
+  &:hover {
+    background-color: darken($color-blue, 10%);
+  }
 }
 
 .controls {
   display: flex;
   align-items: center;
 }
+
 .cardsContainer {
   display: grid;
   gap: 20px;

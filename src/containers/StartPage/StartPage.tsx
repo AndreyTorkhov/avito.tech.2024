@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import CardsItem from "../../components/CardsItem";
 import Pagination from "../../components/Pagination";
 import CreaterAdvertisement from "../../components/CreaterAdvertisement";
-import SearchBar from "../../components/SearchBar"; // Импортируем поиск
+import SearchBar from "../../components/SearchBar";
 import { getApiResource } from "../../utils/network";
 import { Advertisement } from "../../types/interfaces";
 import {
@@ -14,7 +15,7 @@ import styles from "./StartPage.module.scss";
 
 const StartPage: React.FC = () => {
   const [advertisements, setAdvertisements] = useState<Advertisement[]>([]);
-  const [filteredAds, setFilteredAds] = useState<Advertisement[]>([]); // Отфильтрованные объявления
+  const [filteredAds, setFilteredAds] = useState<Advertisement[]>([]);
   const [cardsPerPage, setCardsPerPage] = useState(DEFAULT_CARDS_PER_PAGE);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -31,7 +32,7 @@ const StartPage: React.FC = () => {
     }));
 
     setAdvertisements(adsWithDefaultImage);
-    setFilteredAds(adsWithDefaultImage); // Изначально показываем все объявления
+    setFilteredAds(adsWithDefaultImage);
   };
 
   useEffect(() => {
@@ -65,7 +66,10 @@ const StartPage: React.FC = () => {
         <CreaterAdvertisement
           onAdvertisementCreated={() => getResource(API_ADVERTISEMENTS)}
         />
-        <SearchBar onSearch={handleSearch} /> {/* Добавляем компонент поиска */}
+        <Link to="/orders" className={styles.orderButton}>
+          Перейти к заказам
+        </Link>
+        <SearchBar onSearch={handleSearch} />
         <div className={styles.controls}>
           <label htmlFor="cardsPerPage">Карточек на странице: </label>
           <select

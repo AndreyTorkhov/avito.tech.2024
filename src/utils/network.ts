@@ -16,6 +16,21 @@ export const getApiResource = async (url: string) => {
   }
 };
 
+export const getApiOrders = async (url: string) => {
+  try {
+    const res: Response = await fetch(url);
+    if (!res.ok) {
+      throw new Error(`Could not fetch. Status: ${res.status}`);
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching orders:", error);
+    throw error;
+  }
+};
+
 export const createAdvertisement = async (advertisement: Advertisement) => {
   try {
     const res = await fetch("http://localhost:3000/advertisements", {

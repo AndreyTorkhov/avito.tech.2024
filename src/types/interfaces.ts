@@ -9,40 +9,34 @@ export type Advertisement = {
   imageUrl?: string;
 };
 
-// const OrderStatus = {
-//   Created: 0,
-//   Paid: 1,
-//   Transport: 2,
-//   DeliveredToThePoint: 3,
-//   Received: 4,
-//   Archived: 5,
-//   Refund: 6
-// } as const;
+export const OrderStatus = {
+  Created: 0,
+  Paid: 1,
+  Transport: 2,
+  DeliveredToThePoint: 3,
+  Received: 4,
+  Archived: 5,
+  Refund: 6,
+} as const;
 
-// type OrderItem = Advertisment & { count: number; };
+export type OrderStatusType = (typeof OrderStatus)[keyof typeof OrderStatus];
 
-// type Order = {
-//   /* Уникальный идентификатор. */
-//   id: string;
-//   /* Статус. */
-//   status: typeof OrderStatus[keyof typeof OrderStatus];
-//   /* Дата и время создания. */
-//   createdAt: string;
-//   /* Дата и время завершения. */
-//   finishedAt?: string;
-//   /* Товары в заказе. */
-//   items: Array<OrderItem>;
-//   /* Способ доставки(Почта, СДЭК...) */
-//   deliveryWay: string;
-//   /* Сумма заказа */
-//   total: number;
-// }
+export type Image = {
+  id: number;
+  url: string;
+  name: string;
+};
 
-// type Image = {
-//   /* Уникальный идентификатор. */
-//   id: number;
-//   /* Ссылка. */
-//   url: string;
-//   /* Название. */
-//   name: string;
-// }
+export type OrderItem = Advertisement & {
+  count: number;
+};
+
+export type Order = {
+  id: string;
+  status: OrderStatusType;
+  createdAt: string;
+  finishedAt?: string;
+  items: Array<OrderItem>;
+  deliveryWay: string;
+  total: number;
+};

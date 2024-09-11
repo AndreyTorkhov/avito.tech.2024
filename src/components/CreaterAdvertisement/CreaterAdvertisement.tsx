@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { createAdvertisement } from "../../utils/network";
-import { generateUniqueId } from "../../services/generateUniqueId";
 import { useDispatch } from "react-redux";
 import { Advertisement } from "../../types/interfaces";
 import { addAdvertisement } from "../../store/advertisementSlice";
@@ -17,9 +16,9 @@ const CreaterAdvertisement: React.FC<{
     imageUrl: "",
   });
   const [isModalOpen, setModalOpen] = useState(false);
+  const [adIdCounter, setAdIdCounter] = useState(14);
   const dispatch = useDispatch();
 
-  // Функция для сброса формы
   const resetForm = () => {
     setFormData({
       name: "",
@@ -32,14 +31,13 @@ const CreaterAdvertisement: React.FC<{
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    // Проверка URL изображения и установка заглушки, если URL пустой или некорректен
     const imageUrl =
       formData.imageUrl && isValidUrl(formData.imageUrl)
         ? formData.imageUrl
         : defaultImage;
 
     const newAd: Advertisement = {
-      id: generateUniqueId(),
+      id: adIdCounter.toString(),
       name: formData.name || "",
       price: formData.price || 0,
       description: formData.description || "",
@@ -55,15 +53,15 @@ const CreaterAdvertisement: React.FC<{
 
     if (result) {
       alert("Объявление успешно создано!");
+      setAdIdCounter(adIdCounter + 1);
       setModalOpen(false);
-      onAdvertisementCreated(); // Обновляем список объявлений
-      resetForm(); // Сбрасываем форму после успешной отправки
+      onAdvertisementCreated();
+      resetForm();
     } else {
       alert("Ошибка при создании объявления.");
     }
   };
 
-  // Валидация URL для проверки корректности ссылки
   const isValidUrl = (url: string) => {
     try {
       new URL(url);

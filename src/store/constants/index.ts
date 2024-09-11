@@ -1,3 +1,0 @@
-export const ADD_ADVERTISEMENT: string = "ADD_ADVERTISEMENT";
-
-export const SET_ADVERTISEMENT: string = "SET_ADVERTISEMENT";

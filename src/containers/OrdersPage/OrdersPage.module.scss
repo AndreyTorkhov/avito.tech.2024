@@ -1,0 +1,137 @@
+@import "../../styles/variables.scss";
+
+.orderCard {
+  background-color: $card-bg;
+  border: $card-border;
+  border-radius: $card-radius;
+  padding: $card-padding;
+  margin: $spacing-medium;
+  box-shadow: $box-shadow-black;
+  transition: transform $transition, box-shadow $transition;
+
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: $card-hover-shadow;
+  }
+
+  &__header {
+    margin-bottom: $spacing-medium;
+    border-bottom: 1px solid $color-gray;
+    padding-bottom: $spacing-small;
+  }
+
+  &__title {
+    font-size: $font-size-header;
+    font-weight: $font-bold;
+    margin: 0;
+  }
+
+  &__status {
+    font-size: $font-size-main;
+    color: $color-dark-gray;
+  }
+
+  &__details {
+    margin-top: $spacing-small;
+    font-size: $font-size-main;
+
+    &__line {
+      margin-bottom: $spacing-small;
+      display: flex;
+      justify-content: space-between;
+      font-size: $font-size-small;
+
+      &__label {
+        font-weight: $font-bold;
+      }
+    }
+  }
+
+  &__button {
+    background-color: $color-blue;
+    color: $color-white;
+    border: none;
+    border-radius: $border-radius-small;
+    padding: $spacing-small $spacing-medium;
+    font-size: $font-size-main;
+    cursor: pointer;
+    transition: background-color $transition;
+
+    &:hover {
+      background-color: darken($color-blue, 10%);
+    }
+  }
+
+  &__items {
+    margin-top: $spacing-medium;
+
+    &__orderItem {
+      background-color: $color-gray;
+      border-radius: $border-radius-small;
+      padding: $spacing-small;
+      margin-bottom: $spacing-small;
+      box-shadow: $box-shadow-white;
+      transition: transform $transition, box-shadow $transition;
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-small;
+
+      &:hover {
+        transform: scale(1.02);
+        box-shadow: $box-shadow-black;
+      }
+
+      &__name {
+        font-size: $font-size-main;
+        font-weight: $font-bold;
+        color: $color-dark-gray;
+        display: block;
+      }
+
+      &__details {
+        font-size: $font-size-small;
+        color: $color-dark-gray;
+      }
+
+      &__button {
+        background-color: $color-blue;
+        color: $color-white;
+        border: none;
+        border-radius: $border-radius-small;
+        padding: $spacing-small $spacing-medium;
+        font-size: $font-size-small;
+        cursor: pointer;
+        transition: background-color $transition;
+
+        &:hover {
+          background-color: darken($color-purple, 10%);
+        }
+      }
+    }
+  }
+}
+
+.toolsContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing-small 0;
+  margin-bottom: $spacing-medium;
+  margin-left: $spacing-medium;
+}
+
+.advertisementButton {
+  background-color: $color-blue;
+  color: $color-white;
+  padding: $spacing-small;
+  border: none;
+  border-radius: $border-radius-medium;
+  cursor: pointer;
+  font-size: $font-size-main;
+  transition: background-color $transition;
+  text-decoration: none;
+
+  &:hover {
+    background-color: darken($color-blue, 10%);
+  }
+}
