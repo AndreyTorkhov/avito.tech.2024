@@ -148,9 +148,9 @@ const AdvertisementsPage: React.FC = () => {
             className={styles.image}
           />
           <p>{advertisement.description}</p>
-          <p>Price: ${advertisement.price}</p>
-          <p>Views: {advertisement.views}</p>
-          <p>Likes: {advertisement.likes}</p>
+          <p>Цена: {advertisement.price} рублей</p>
+          <p>Просмотры: {advertisement.views}</p>
+          <p>Лайки: {advertisement.likes}</p>
           <button
             onClick={() => setEditing(true)}
             className={styles.submitButton}

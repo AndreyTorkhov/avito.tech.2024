@@ -1,22 +1,57 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getApiOrders } from "../../utils/network";
 import { Order, OrderStatus, OrderStatusType } from "../../types/interfaces";
-import { useNavigate } from "react-router-dom";
 import styles from "./OrdersPage.module.scss";
+import Filter from "../../components/Filter";
 
-const OrdersPage = () => {
+const OrdersPage: React.FC = () => {
   const [orders, setOrders] = useState<Order[]>([]);
+  const [filteredOrders, setFilteredOrders] = useState<Order[]>([]);
   const [expandedOrder, setExpandedOrder] = useState<string | null>(null);
+  const [statusFilter, setStatusFilter] = useState<OrderStatusType | "">(""); // Фильтр по статусу
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc"); // Порядок сортировки
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchOrders = async () => {
-      const data = await getApiOrders("http://localhost:3000/orders");
+      // Преобразуем значения в строки
+      const statusString = statusFilter ? statusFilter.toString() : undefined;
+      const sortString = sortOrder === "asc" ? "price" : "price_desc";
+
+      // Передаем параметры фильтрации и сортировки в запрос
+      const data = await getApiOrders(
+        "http://localhost:3000/orders",
+        statusString,
+        sortString
+      );
       setOrders(data);
     };
     fetchOrders();
-  }, []);
+  }, [statusFilter, sortOrder]);
+
+  useEffect(() => {
+    // Фильтрация и сортировка заказов
+    let updatedOrders = [...orders];
+
+    // Фильтрация по статусу
+    if (statusFilter !== "") {
+      updatedOrders = updatedOrders.filter(
+        (order) => order.status === statusFilter
+      );
+    }
+
+    // Сортировка по сумме
+    updatedOrders.sort((a, b) => {
+      if (sortOrder === "asc") {
+        return a.total - b.total;
+      } else {
+        return b.total - a.total;
+      }
+    });
+
+    setFilteredOrders(updatedOrders);
+  }, [orders, statusFilter, sortOrder]);
 
   const toggleExpandOrder = (orderId: string) => {
     setExpandedOrder(expandedOrder === orderId ? null : orderId);
@@ -51,7 +86,11 @@ const OrdersPage = () => {
         </Link>
       </div>
 
-      {orders.map((order) => (
+      {/* Подключаем фильтр */}
+      <Filter onFilterChange={setStatusFilter} onSortChange={setSortOrder} />
+
+      {/* Отображаем заказы */}
+      {filteredOrders.map((order) => (
         <div key={order.id} className={styles.orderCard}>
           <div className={styles.orderCard__header}>
             <h3 className={styles.orderCard__title}>

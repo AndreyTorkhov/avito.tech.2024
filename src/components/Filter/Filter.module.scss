@@ -1,0 +1,87 @@
+@import "../../styles/variables.scss";
+
+.filtersContainer {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-medium;
+  max-width: $width-max;
+  margin: $spacing-large auto;
+  padding: $spacing-medium;
+  background-color: $color-white;
+  border-radius: $border-radius-small;
+  box-shadow: $box-shadow-black;
+
+  label {
+    display: flex;
+    flex-direction: column;
+    font-family: $font-family-main;
+    font-size: $font-size-main;
+    color: $color-dark-gray;
+    margin-bottom: $spacing-small;
+
+    select {
+      margin-top: $spacing-small;
+      padding: $spacing-small;
+      font-size: $font-size-small;
+      font-family: $font-family-main;
+      color: $color-black;
+      background-color: $color-light-gray;
+      border: $card-border;
+      border-radius: $border-radius-small;
+      transition: background-color $transition;
+
+      &:hover {
+        background-color: lighten($color-light-gray, 10%);
+      }
+
+      &:focus {
+        background-color: $color-white;
+        box-shadow: $box-shadow-white;
+      }
+    }
+  }
+
+  // Стили для кнопок пагинации (если нужно)
+  .pagination {
+    display: flex;
+    gap: $pagination-spacing;
+
+    button {
+      background-color: $pagination-bg;
+      color: $pagination-text-color;
+      padding: $pagination-padding;
+      border-radius: $pagination-border-radius;
+      border: none;
+      cursor: pointer;
+      transition: background-color $transition;
+
+      &:hover {
+        background-color: $pagination-hover-bg;
+      }
+
+      &:disabled {
+        background-color: $pagination-disabled-bg;
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+.filterSelect {
+  padding: $spacing-small;
+  border-radius: $border-radius-small;
+  background-color: $color-light-gray;
+  border: 1px solid $color-gray;
+  font-size: $font-size-main;
+  color: $color-black;
+  transition: background-color $transition, box-shadow $transition;
+
+  &:hover {
+    background-color: lighten($color-light-gray, 10%);
+  }
+
+  &:focus {
+    background-color: $color-white;
+    box-shadow: $box-shadow-black;
+  }
+}

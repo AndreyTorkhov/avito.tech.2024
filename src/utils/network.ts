@@ -16,9 +16,19 @@ export const getApiResource = async (url: string) => {
   }
 };
 
-export const getApiOrders = async (url: string) => {
+export const getApiOrders = async (
+  url: string,
+  status?: string, // Должен быть string
+  sort?: string // Должен быть string
+) => {
   try {
-    const res: Response = await fetch(url);
+    // Формируем параметры для запроса
+    let apiUrl = `${url}?`;
+    if (status) apiUrl += `_status=${status}&`;
+    if (sort) apiUrl += `_sort=${sort}&`;
+
+    const res: Response = await fetch(apiUrl.slice(0, -1)); // Убираем последний "&"
+
     if (!res.ok) {
       throw new Error(`Could not fetch. Status: ${res.status}`);
     }
