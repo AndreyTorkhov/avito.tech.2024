@@ -1,50 +1,32 @@
-# React + TypeScript + Vite
+# avito.tech.2024
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Описание проекта
 
-Currently, two official plugins are available:
+Разработка личного кабинета продавца на маркетплейсе, в котором есть возможность управлять своими объявлениями и заказами.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Стек технологий
 
-## Expanding the ESLint configuration
+- **React**: Версия 18
+- **Node.js**: Версия 20
+- **Vite**: Сборщик проекта
+- **Docker**: Для контейнеризации приложения
+- **Docker Compose**: Для упрощения работы с многоконтейнерными приложениями
+- **npm**: Пакетный менеджер
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Шаги для запуска
 
-- Configure the top-level `parserOptions` property like this:
+```bash
+# Клонируйте репозиторий
+git clone https://github.com/AndreyTorkhov/avito.tech.2024.git
+cd avito.tech.2024
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+# Запустите проект с помощью Docker Compose
+docker-compose up --build
+
+#Откройте браузер и перейдите по адресу
+http://localhost:5173
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Проблемы
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+Докер не запускался на порту 5173. Решение: добить флаг --host к команде "dev": "vite --host"
