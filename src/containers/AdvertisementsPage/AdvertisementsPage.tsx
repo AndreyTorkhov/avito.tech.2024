@@ -7,7 +7,8 @@ import { useParams } from "react-router-dom";
 import { getApiResource, updateApiResource } from "../../utils/network";
 import { Advertisement } from "../../types/interfaces";
 import { API_ADVERTISEMENTS } from "../../constants/api";
-import defaultImage from "./../StartPage/img/avito.jpeg";
+import { isValidUrl } from "../../services/isValidUrl";
+import DEFAULT_IMAGE_URL from "../../assets/avito.jpeg";
 import styles from "./AdvertisementsPage.module.scss";
 
 const AdvertisementsPage: React.FC = () => {
@@ -30,7 +31,7 @@ const AdvertisementsPage: React.FC = () => {
       if (res) {
         setAdvertisement(res);
         setFormData({
-          imageUrl: res.imageUrl || defaultImage,
+          imageUrl: res.imageUrl || DEFAULT_IMAGE_URL,
           name: res.name,
           price: res.price,
           description: res.description,
@@ -50,15 +51,6 @@ const AdvertisementsPage: React.FC = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const isValidUrl = (url: string): boolean => {
-    try {
-      new URL(url);
-      return true;
-    } catch (_) {
-      return false;
-    }
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -67,7 +59,7 @@ const AdvertisementsPage: React.FC = () => {
     const validatedImageUrl =
       formData.imageUrl && isValidUrl(formData.imageUrl)
         ? formData.imageUrl
-        : defaultImage;
+        : DEFAULT_IMAGE_URL;
 
     const updatedAd = {
       ...advertisement,

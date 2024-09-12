@@ -47,9 +47,12 @@ $card-bg: $color-white;
 $card-border: 1px solid #ddd;
 $card-radius: 8px;
 $card-padding: 16px;
-$card-hover-scale: 1.05;
+$card-hover-scale: 1.01;
 $card-hover-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 $card-gap: 10px;
+$card-min-width: 300px;
+$card-min-height: 350px;
+$card-small-width: 150px;
 
 // Переменные для пагинации
 $pagination-bg: $color-blue;

@@ -9,7 +9,7 @@ const CardsPerPageSelector: React.FC<CardsPerPageSelectorProps> = ({
   cardsPerPage,
   onChange,
 }) => {
-  const options = [2, 4, 6, 8, 10];
+  const options = [2, 4, 10];
 
   return (
     <div className={styles.controls}>

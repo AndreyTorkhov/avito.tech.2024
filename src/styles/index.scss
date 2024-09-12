@@ -1,62 +1,7 @@
-$color-white: #fff;
-$color-black: #000;
-$color-yellow: #ffff00;
-$color-dark-gray: #10100e;
-$color-blue: #002aff;
-$color-purple: #ae72c2;
-$color-red: #f75d83;
-
-$spacing-ultrasmall: 5px;
-$spacing-small: 10px;
-$spacing-medium: 20px;
-$spacing-large: 30px;
-
-$font-bold: 600;
-$transition: 0.4s;
-$font-family-main: sans-serif;
-
-$margin-list: 7px;
-
-$font-size-small: 14px;
-$font-size-main: 16px;
-$font-size-subheader: 18px;
-$font-size-header: 26px;
-
-$width-max: 1200px;
-
-$border-radius-small: 3px;
-$border-radius-medium: 5px;
-
-$text-shadow-blue: 0 0 2px $color-white, 0 0 15px $color-blue;
-$box-shadow-white: 0 16px 24px 2px rgba(255, 255, 255, 0.02),
-  0 6px 30px 5px rgba(255, 255, 255, 0.04),
-  0 8px 10px -5px rgba(255, 255, 255, 0.1);
-
-$box-shadow-black: 0 16px 24px 2px rgba(0, 0, 0, 0.5),
-  0 6px 30px 5px rgba(0, 0, 0, 0.1), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
-
-// Переменные
-$card-bg: #fff;
-$card-border: 1px solid #ddd;
-$card-radius: 8px;
-$card-padding: 16px;
-$card-hover-scale: 1.05;
-$card-hover-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
-// Переменные
-$card-bg: #fff;
-$card-border: 1px solid #ddd;
-$card-radius: 8px;
-$card-padding: 16px;
-$card-hover-scale: 1.05;
-$card-hover-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-$card-gap: 10px;
-
-// Base styles
 body {
   margin: 0;
   padding: 0;
-  background-color: $color-white;
-  font-family: $font-family-main;
-  font-size: $font-size-main;
+  background-color: #fff;
+  font-family: sans-serif;
+  font-size: 16px;
 }

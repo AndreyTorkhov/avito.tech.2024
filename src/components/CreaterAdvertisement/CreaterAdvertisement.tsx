@@ -5,8 +5,9 @@ import { Advertisement } from "../../types/interfaces";
 import { addAdvertisement } from "../../store/advertisementSlice";
 import { API_ADVERTISEMENTS } from "../../constants/api";
 import { generateUniqueId } from "../../services/generateUniqueId";
+import { isValidUrl } from "../../services/isValidUrl";
 import styles from "./CreaterAdvertisement.module.scss";
-import defaultImage from "../../containers/StartPage/img/avito.jpeg";
+import DEFAULT_IMAGE_URL from "../../assets/avito.jpeg";
 
 const CreaterAdvertisement: React.FC<{
   onAdvertisementCreated: () => void;
@@ -36,7 +37,7 @@ const CreaterAdvertisement: React.FC<{
     const imageUrl =
       formData.imageUrl && isValidUrl(formData.imageUrl)
         ? formData.imageUrl
-        : defaultImage;
+        : DEFAULT_IMAGE_URL;
 
     const newId = await generateUniqueId();
     const newAd: Advertisement = {
@@ -62,15 +63,6 @@ const CreaterAdvertisement: React.FC<{
       resetForm();
     } else {
       alert("Ошибка при создании объявления.");
-    }
-  };
-
-  const isValidUrl = (url: string) => {
-    try {
-      new URL(url);
-      return true;
-    } catch (_) {
-      return false;
     }
   };
 

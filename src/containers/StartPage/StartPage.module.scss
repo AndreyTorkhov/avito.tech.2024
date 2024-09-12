@@ -1,23 +1,26 @@
 @import "../../styles/variables.scss";
 
 .pageContainer {
-  position: relative;
-  margin-top: 30px;
-  margin-left: 20px;
-  margin-right: 20px;
-  padding-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  padding: 0 $spacing-medium;
 }
 
 .cardsContainer {
+  flex-grow: 1;
   display: grid;
-  gap: 20px;
-  justify-items: start;
+  gap: $spacing-small;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 0.5fr));
 
-  @media (min-width: 600px) {
-    grid-template-columns: repeat(5, minmax(200px, 1fr));
-  }
+  width: 100%;
+  margin: 0 auto;
+}
 
-  @media (max-width: 599px) {
-    grid-template-columns: repeat(4, minmax(200px, 1fr));
-  }
+.paginationContainer {
+  margin-top: $spacing-small;
+  display: flex;
+  justify-content: center;
 }

@@ -8,7 +8,7 @@ import {
   API_ADVERTISEMENTS,
   DEFAULT_CARDS_PER_PAGE,
 } from "../../constants/api";
-import defaultImage from "./img/avito.jpeg";
+import DEFAULT_IMAGE_URL from "../../assets/avito.jpeg";
 import styles from "./StartPage.module.scss";
 
 const StartPage: React.FC = () => {
@@ -25,7 +25,7 @@ const StartPage: React.FC = () => {
 
     const adsWithDefaultImage = res.map((ad: Advertisement) => ({
       ...ad,
-      imageUrl: ad.imageUrl || defaultImage,
+      imageUrl: ad.imageUrl || DEFAULT_IMAGE_URL,
     }));
 
     setAdvertisements(adsWithDefaultImage);
@@ -57,12 +57,15 @@ const StartPage: React.FC = () => {
 
   return (
     <div className={styles.pageContainer}>
-      <ToolsContainer
-        onSearch={handleSearch}
-        onAdvertisementCreated={() => getResource(API_ADVERTISEMENTS)}
-        cardsPerPage={cardsPerPage}
-        onCardsPerPageChange={handleCardsPerPageChange}
-      />
+      <div className={styles.toolsContainer}>
+        <ToolsContainer
+          onSearch={handleSearch}
+          onAdvertisementCreated={() => getResource(API_ADVERTISEMENTS)}
+          cardsPerPage={cardsPerPage}
+          onCardsPerPageChange={handleCardsPerPageChange}
+        />
+      </div>
+
       <div className={styles.cardsContainer}>
         {filteredAds
           .slice((currentPage - 1) * cardsPerPage, currentPage * cardsPerPage)
@@ -78,6 +81,7 @@ const StartPage: React.FC = () => {
             />
           ))}
       </div>
+      <div className={styles.paginationContainer}></div>
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}

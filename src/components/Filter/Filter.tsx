@@ -13,7 +13,7 @@ const Filter: React.FC<FiltersProps> = ({ onFilterChange, onSortChange }) => {
     let numericValue;
 
     if (value === "") {
-      window.location.reload(); // Перезагружаем страницу при выборе "Все"
+      window.location.reload();
     } else {
       numericValue = Number(value);
     }
