@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { getApiResource, updateApiResource } from "../../utils/network";
 import { Advertisement } from "../../types/interfaces";
 import { API_ADVERTISEMENTS } from "../../constants/api";
@@ -7,6 +7,7 @@ import defaultImage from "./../StartPage/img/avito.jpeg";
 import styles from "./AdvertisementsPage.module.scss";
 
 const AdvertisementsPage: React.FC = () => {
+  const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const [advertisement, setAdvertisement] = useState<Advertisement | null>(
     null
@@ -38,6 +39,13 @@ const AdvertisementsPage: React.FC = () => {
 
     fetchAdvertisement();
   }, [id]);
+
+  const handleGoBack = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    e.preventDefault();
+    navigate(-1);
+  };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -94,7 +102,7 @@ const AdvertisementsPage: React.FC = () => {
 
   return (
     <div className={styles.detailContainer}>
-      <Link to="/" className={styles.backButton}>
+      <Link to="#" onClick={handleGoBack} className={styles.backButton}>
         Назад
       </Link>
       {editing ? (

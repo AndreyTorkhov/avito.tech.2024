@@ -10,15 +10,18 @@ interface FiltersProps {
 const Filter: React.FC<FiltersProps> = ({ onFilterChange, onSortChange }) => {
   const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
+    let numericValue;
 
-    // Преобразуем значение в число
-    const numericValue = Number(value);
-
-    // Проверяем, что число соответствует одному из значений OrderStatus
-    if (Object.values(OrderStatus).includes(numericValue as OrderStatusType)) {
-      onFilterChange(numericValue as OrderStatusType); // Преобразуем число в тип OrderStatusType
+    if (value === "") {
+      window.location.reload(); // Перезагружаем страницу при выборе "Все"
     } else {
-      onFilterChange(""); // Если значение не подходит, устанавливаем фильтр на "Все"
+      numericValue = Number(value);
+    }
+
+    if (Object.values(OrderStatus).includes(numericValue as OrderStatusType)) {
+      onFilterChange(numericValue as OrderStatusType);
+    } else {
+      onFilterChange("");
     }
   };
 
