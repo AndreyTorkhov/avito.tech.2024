@@ -1,13 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import routesConfig from "../../routes/routesConfig";
-// import Navigation from "../../components/Navigation";
 
 const App = () => {
   return (
     <>
       <BrowserRouter>
         <div>
-          {/* <Navigation /> */}
           <Routes>
             {routesConfig.map((route, index) => (
               <Route

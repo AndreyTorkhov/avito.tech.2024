@@ -3,6 +3,8 @@ import { createAdvertisement } from "../../utils/network";
 import { useDispatch } from "react-redux";
 import { Advertisement } from "../../types/interfaces";
 import { addAdvertisement } from "../../store/advertisementSlice";
+import { API_ADVERTISEMENTS } from "../../constants/api";
+import { generateUniqueId } from "../../services/generateUniqueId";
 import styles from "./CreaterAdvertisement.module.scss";
 import defaultImage from "../../containers/StartPage/img/avito.jpeg";
 
@@ -36,8 +38,9 @@ const CreaterAdvertisement: React.FC<{
         ? formData.imageUrl
         : defaultImage;
 
+    const newId = await generateUniqueId();
     const newAd: Advertisement = {
-      id: adIdCounter.toString(),
+      id: newId.toString(),
       name: formData.name || "",
       price: formData.price || 0,
       description: formData.description || "",
@@ -49,7 +52,7 @@ const CreaterAdvertisement: React.FC<{
 
     dispatch(addAdvertisement(newAd));
 
-    const result = await createAdvertisement(newAd);
+    const result = await createAdvertisement(API_ADVERTISEMENTS, newAd);
 
     if (result) {
       alert("Объявление успешно создано!");

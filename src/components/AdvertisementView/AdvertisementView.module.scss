@@ -1,0 +1,16 @@
+@import "../../styles/variables.scss";
+
+.submitButton {
+  background-color: $color-blue;
+  color: $color-white;
+  border: none;
+  border-radius: $border-radius-medium;
+  cursor: pointer;
+  padding: $spacing-small $spacing-medium;
+  font-size: $font-size-main;
+  transition: $transition;
+}
+
+.submitButton:hover {
+  background-color: darken($color-blue, 10%);
+}

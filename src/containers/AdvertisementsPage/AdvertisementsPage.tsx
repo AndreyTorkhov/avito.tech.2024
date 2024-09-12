@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import BackButton from "../../components/BackButton";
+import AdvertisementForm from "../../components/AdvertisementForm";
+import AdvertisementView from "../../components/AdvertisementView";
+import Loader from "../../components/Loader";
+import { useParams } from "react-router-dom";
 import { getApiResource, updateApiResource } from "../../utils/network";
 import { Advertisement } from "../../types/interfaces";
 import { API_ADVERTISEMENTS } from "../../constants/api";
@@ -7,7 +11,6 @@ import defaultImage from "./../StartPage/img/avito.jpeg";
 import styles from "./AdvertisementsPage.module.scss";
 
 const AdvertisementsPage: React.FC = () => {
-  const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const [advertisement, setAdvertisement] = useState<Advertisement | null>(
     null
@@ -39,13 +42,6 @@ const AdvertisementsPage: React.FC = () => {
 
     fetchAdvertisement();
   }, [id]);
-
-  const handleGoBack = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    e.preventDefault();
-    navigate(-1);
-  };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -98,74 +94,22 @@ const AdvertisementsPage: React.FC = () => {
     }
   };
 
-  if (!advertisement) return <div>Loading...</div>;
+  if (!advertisement) return <Loader />;
 
   return (
     <div className={styles.detailContainer}>
-      <Link to="#" onClick={handleGoBack} className={styles.backButton}>
-        Назад
-      </Link>
+      <BackButton text="Назад" />
       {editing ? (
-        <form onSubmit={handleSubmit} className={styles.editForm}>
-          <label>
-            URL Изображения:
-            <input
-              type="text"
-              name="imageUrl"
-              value={formData.imageUrl || ""}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            Название:
-            <input
-              type="text"
-              name="name"
-              value={formData.name || ""}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            Цена:
-            <input
-              type="number"
-              name="price"
-              value={formData.price || 0}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label>
-            Описание:
-            <textarea
-              name="description"
-              value={formData.description || ""}
-              onChange={handleChange}
-            />
-          </label>
-          <button type="submit" className={styles.submitButton}>
-            Сохранить
-          </button>
-        </form>
+        <AdvertisementForm
+          formData={formData}
+          onSubmit={handleSubmit}
+          onChange={handleChange}
+        />
       ) : (
-        <>
-          <h1>{advertisement.name}</h1>
-          <img
-            src={advertisement.imageUrl}
-            alt={advertisement.name}
-            className={styles.image}
-          />
-          <p>{advertisement.description}</p>
-          <p>Цена: {advertisement.price} рублей</p>
-          <p>Просмотры: {advertisement.views}</p>
-          <p>Лайки: {advertisement.likes}</p>
-          <button
-            onClick={() => setEditing(true)}
-            className={styles.submitButton}
-          >
-            Редактировать
-          </button>
-        </>
+        <AdvertisementView
+          advertisement={advertisement}
+          onEdit={() => setEditing(true)}
+        />
       )}
     </div>
   );

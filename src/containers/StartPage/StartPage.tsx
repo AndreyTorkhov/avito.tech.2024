@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CardsItem from "../../components/CardsItem";
 import Pagination from "../../components/Pagination";
+import ToolsContainer from "../../components/ToolsContainer";
 import { getApiResource } from "../../utils/network";
 import { Advertisement } from "../../types/interfaces";
 import {
@@ -9,7 +10,6 @@ import {
 } from "../../constants/api";
 import defaultImage from "./img/avito.jpeg";
 import styles from "./StartPage.module.scss";
-import ToolsContainer from "../../components/ToolsContainer";
 
 const StartPage: React.FC = () => {
   const [advertisements, setAdvertisements] = useState<Advertisement[]>([]);

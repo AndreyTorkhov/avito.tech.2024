@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Filter from "../../components/Filter";
+import OrdersItem from "../../components/OrdersItem";
 import { getApiOrders } from "../../utils/network";
+import { API_ORDERS } from "../../constants/api";
 import { Order, OrderStatusType } from "../../types/interfaces";
 import styles from "./OrdersPage.module.scss";
-import Filter from "../../components/Filter";
-import OrdersItem from "../../components/OrdersItem/OrdersItem"; // Импортируем компонент
 
 const OrdersPage: React.FC = () => {
   const [orders, setOrders] = useState<Order[]>([]);
@@ -18,11 +19,7 @@ const OrdersPage: React.FC = () => {
     const fetchOrders = async () => {
       const statusString = statusFilter ? statusFilter.toString() : undefined;
       const sortString = sortOrder === "asc" ? "price" : "price_desc";
-      const data = await getApiOrders(
-        "http://localhost:3000/orders",
-        statusString,
-        sortString
-      );
+      const data = await getApiOrders(API_ORDERS, statusString, sortString);
       setOrders(data);
     };
     fetchOrders();
@@ -54,9 +51,8 @@ const OrdersPage: React.FC = () => {
         <Link to="/" className={styles.advertisementButton}>
           Перейти к объявлениям
         </Link>
+        <Filter onFilterChange={setStatusFilter} onSortChange={setSortOrder} />
       </div>
-
-      <Filter onFilterChange={setStatusFilter} onSortChange={setSortOrder} />
 
       {filteredOrders.map((order) => (
         <OrdersItem

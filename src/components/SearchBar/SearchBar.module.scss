@@ -1,14 +1,24 @@
+@import "../../styles/variables.scss";
+
 .searchContainer {
   position: absolute;
-  margin-bottom: 20px;
+  margin-bottom: $spacing-medium;
   display: flex;
   justify-content: center;
 }
 
 .searchInput {
   width: 300px;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 16px;
+  padding: $spacing-small;
+  border-radius: $border-radius-small;
+  border: 1px solid $color-gray;
+  font-size: $font-size-main;
+  color: $color-black;
+  background-color: $color-white;
+  transition: border-color $transition, box-shadow $transition;
+
+  &:focus {
+    border-color: $color-blue;
+    box-shadow: 0 0 5px $color-blue;
+  }
 }
